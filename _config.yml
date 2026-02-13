@@ -1,0 +1,18 @@
+title: Moe Kyaw Aung
+description: Android Developer | Web Designer | Data Visualization
+baseurl: ""
+url: "https://moekyawaung.github.io"
+theme: jekyll-theme-minimal
+
+# Custom theme settings
+theme_config:
+  appearance: dark
+  analytics: false
+  back_home: true
+
+# Navigation
+nav:
+  - name: "Home"
+  - name: "Projects"
+  - name: "About"
+  - name: "Contact"
