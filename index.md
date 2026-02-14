@@ -86,3 +86,24 @@ title: Moe Kyaw Aung
     </div>
   </div>
 </section>
+<section id="skills" style="padding: 100px 0; background: var(--bg-secondary);">
+  <div class="container">
+    <h2 style="text-align: center; margin-bottom: 3rem;">Skills Timeline</h2>
+    <div style="max-width: 800px; margin: 0 auto;">
+      <div style="display: flex; align-items: center; margin-bottom: 3rem; padding-left: 2rem; position: relative;">
+        <div style="position: absolute; left: 0; width: 3px; height: 100%; background: linear-gradient(var(--accent), var(--purple));"></div>
+        <div style="flex: 1;">
+          <h3 style="margin: 0 0 0.5rem 0; color: var(--accent);">2023 - Present</h3>
+          <p style="color: var(--text-secondary);">Android Development (Kotlin, Jetpack Compose)</p>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; margin-bottom: 3rem; padding-left: 2rem; position: relative;">
+        <div style="position: absolute; left: 0; width: 3px; height: 100%; background: linear-gradient(var(--accent), var(--purple));"></div>
+        <div style="flex: 1;">
+          <h3 style="margin: 0 0 0.5rem 0; color: var(--accent);">2022 - 2023</h3>
+          <p style="color: var(--text-secondary);">Data Visualization (R, ggplot2, Shiny)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
