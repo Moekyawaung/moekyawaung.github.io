@@ -221,3 +221,8 @@ body {
     grid-template-columns: 1fr;
   }
   }
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+body { font-family: 'Inter', sans-serif; }
+.project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+@media (max-width: 768px) { .project-grid { grid-template-columns: 1fr; } }
+body { background: linear-gradient(135deg, #0b0c10 0%, #1a1a2e 50%, #16213e 100%); }
