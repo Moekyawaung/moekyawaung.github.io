@@ -107,3 +107,33 @@ title: Moe Kyaw Aung
     </div>
   </div>
 </section>
+
+<section id="contact" style="padding: 100px 0; background: var(--bg-primary); text-align: center;">
+  <div class="container">
+    <h2 style="margin-bottom: 3rem; font-size: 2.5rem;">Get In Touch</h2>
+    <div style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
+      <a href="https://github.com/Moekyawaung" class="cta-button" 
+         style="background: #181717; color: white; width: 200px;">
+        GitHub →
+      </a>
+      <a href="mailto:moekyawaung@engineer.com" class="cta-button" 
+         style="background: var(--accent); color: #0a0b0d; width: 200px;">
+        Email Me
+      </a>
+      <a href="https://linkedin.com/in/moe-kyaw-aung" class="cta-button" 
+         style="background: #0A66C2; color: white; width: 200px;">
+        LinkedIn
+      </a>
+    </div>
+    <p style="margin-top: 3rem; color: var(--text-secondary); font-size: 0.9rem;">
+      Tachileik , Shan State , Myanmar | Open for freelance projects
+    </p>
+  </div>
+</section>
+<footer style="background: var(--bg-secondary); padding: 2rem 0; text-align: center; border-top: 1px solid var(--border);">
+  <div class="container">
+    <p style="color: var(--text-secondary); margin: 0;">
+      © 2026 Moe Kyaw Aung. Built with ❤️ using GitHub Pages.
+    </p>
+  </div>
+</footer>
