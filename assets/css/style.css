@@ -266,3 +266,33 @@ body {
   border: 1px solid var(--glass);
   transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
                                                                               }
+/* Professional Color Scheme + Hover Effects */
+:root {
+  --primary: #00D4AA; --secondary: #A8E6CF; --accent: #FF6B6B;
+  --glass: rgba(255,255,255,0.1); --glass-hover: rgba(255,255,255,0.2);
+}
+
+.project-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem; padding: 2rem 0;
+}
+
+.project-card {
+  padding: 2rem; border-radius: 16px;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.project-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  background: var(--glass-hover);
+  border-color: var(--primary);
+  box-shadow: 0 20px 40px rgba(0,212,170,0.3);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .project-card:hover {
+    transform: translateY(-4px) scale(1.01); /* Subtle mobile lift */
+  }
+  }
+  
