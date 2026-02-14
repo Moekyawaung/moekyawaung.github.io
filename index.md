@@ -137,3 +137,12 @@ title: Moe Kyaw Aung
     </p>
   </div>
 </footer>
+<nav style="position: sticky; top: 0; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); z-index: 1000;">
+  <ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
