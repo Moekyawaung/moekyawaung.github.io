@@ -146,3 +146,5 @@ title: Moe Kyaw Aung
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
