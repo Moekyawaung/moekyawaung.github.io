@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Moe Kyaw Aung — Android Developer & Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0c0c0f;
+      --surface:  #141418;
+      --card:     #1a1a20;
+      --border:   #2a2a35;
+      --accent:   #00e5a0;
+      --accent2:  #5b6cff;
+      --text:     #e8e8f0;
+      --muted:    #7a7a90;
+      --white:    #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content:'';
+      position:fixed; inset:0; z-index:0; pointer-events:none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      opacity: 0.4;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 18px 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      backdrop-filter: blur(20px) saturate(150%);
+      background: rgba(12,12,15,0.75);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800; font-size: 1.1rem;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--accent); }
+
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none;
+      font-size: 0.875rem; font-weight: 500;
+      transition: color 0.2s;
+      letter-spacing: 0.02em;
+    }
+    .nav-links a:hover { color: var(--white); }
+
+    .nav-cta {
+      background: var(--accent);
+      color: #0c0c0f !important;
+      padding: 8px 18px;
+      border-radius: 6px;
+      font-weight: 700 !important;
+      transition: opacity 0.2s !important;
+    }
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* ── HERO ── */
+    #home {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 120px 5% 80px;
+      position: relative; overflow: hidden;
+    }
+
+    .hero-glow {
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      filter: blur(120px); opacity: 0.12;
+      pointer-events: none;
+    }
+    .hero-glow.g1 { background: var(--accent); top: -100px; left: -100px; }
+    .hero-glow.g2 { background: var(--accent2); bottom: -100px; right: -100px; }
+
+    .hero-inner { max-width: 900px; position: relative; z-index:1; }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(0,229,160,0.08);
+      border: 1px solid rgba(0,229,160,0.25);
+      color: var(--accent);
+      padding: 6px 14px; border-radius: 999px;
+      font-size: 0.8rem; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      margin-bottom: 28px;
+      animation: fadeUp 0.6s ease both;
+    }
+    .badge-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s ease infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity:1; transform:scale(1); }
+      50% { opacity:0.4; transform:scale(1.5); }
+    }
+
+    .hero-name {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      color: var(--white);
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+    .hero-name .accent-line { color: var(--accent); display: block; }
+
+    .hero-tagline {
+      margin-top: 28px;
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--muted);
+      max-width: 540px;
+      font-weight: 300;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    .hero-actions {
+      margin-top: 44px;
+      display: flex; gap: 16px; flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #0c0c0f;
+      padding: 14px 28px; border-radius: 8px;
+      text-decoration: none; font-weight: 700;
+      font-size: 0.925rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 40px rgba(0,229,160,0.3);
+    }
+
+    .btn-ghost {
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 14px 28px; border-radius: 8px;
+      text-decoration: none; font-weight: 500;
+      font-size: 0.925rem;
+      transition: border-color 0.2s, background 0.2s;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-ghost:hover { border-color: var(--accent); background: rgba(0,229,160,0.05); }
+
+    .hero-stats {
+      margin-top: 64px;
+      display: flex; gap: 48px; flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.4s ease both;
+    }
+    .stat-item { }
+    .stat-number {
+      font-family: 'Syne', sans-serif;
+      font-size: 2rem; font-weight: 800;
+      color: var(--white);
+    }
+    .stat-number span { color: var(--accent); }
+    .stat-label { font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(20px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    /* ── SECTION COMMON ── */
+    section { padding: 100px 5%; position: relative; z-index:1; }
+    .section-label {
+      font-size: 0.75rem; font-weight: 700;
+      color: var(--accent); letter-spacing: 0.12em;
+      text-transform: uppercase; margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800; color: var(--white);
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+      line-height: 1.1;
+    }
+    .section-sub {
+      color: var(--muted); font-size: 1rem;
+      max-width: 500px; margin-bottom: 60px;
+    }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    .project-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .project-card::before {
+      content:'';
+      position:absolute; inset:0;
+      background: radial-gradient(400px at var(--x,50%) var(--y,50%), rgba(0,229,160,0.04), transparent 70%);
+      opacity:0; transition: opacity 0.3s;
+    }
+    .project-card:hover::before { opacity:1; }
+    .project-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(0,229,160,0.3);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+    }
+
+    .project-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; margin-bottom: 20px;
+    }
+    .icon-green  { background: rgba(0,229,160,0.1); }
+    .icon-blue   { background: rgba(91,108,255,0.1); }
+    .icon-orange { background: rgba(255,159,67,0.1); }
+
+    .project-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700; font-size: 1.15rem;
+      color: var(--white); margin-bottom: 10px;
+    }
+    .project-desc {
+      color: var(--muted); font-size: 0.9rem;
+      line-height: 1.7; margin-bottom: 20px;
+    }
+
+    .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+    .tag {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 4px 12px; border-radius: 999px;
+      font-size: 0.75rem; font-weight: 500;
+    }
+    .tag.accent { background: rgba(0,229,160,0.08); border-color: rgba(0,229,160,0.25); color: var(--accent); }
+
+    .project-link {
+      color: var(--accent); text-decoration: none;
+      font-size: 0.875rem; font-weight: 600;
+      display: inline-flex; align-items: center; gap: 6px;
+      transition: gap 0.2s;
+    }
+    .project-link:hover { gap: 10px; }
+
+    /* ── ABOUT ── */
+    #about .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 80px; align-items: center;
+    }
+
+    .about-photo-wrap {
+      position: relative;
+    }
+    .about-photo {
+      width: 100%; aspect-ratio: 1;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #1a1a24, #12121a);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-size: 5rem; font-weight: 800;
+      color: var(--accent);
+      overflow: hidden;
+      position: relative;
+    }
+    .about-photo::after {
+      content:'';
+      position:absolute; inset:0;
+      background: radial-gradient(circle at 30% 30%, rgba(0,229,160,0.08), transparent 60%);
+    }
+    .about-badge-float {
+      position:absolute; bottom:-16px; right:-16px;
+      background: var(--accent);
+      color: #0c0c0f;
+      border-radius: 12px;
+      padding: 12px 18px;
+      font-weight: 700; font-size: 0.85rem;
+      font-family: 'Syne', sans-serif;
+      box-shadow: 0 8px 30px rgba(0,229,160,0.3);
+    }
+
+    .about-text h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.8rem; font-weight: 800;
+      color: var(--white); margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+    .about-text p {
+      color: var(--muted); line-height: 1.8;
+      margin-bottom: 16px; font-size: 0.95rem;
+    }
+
+    .skills-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 12px; margin-top: 32px;
+    }
+    .skill-item {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 0.875rem; color: var(--text);
+    }
+    .skill-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent); flex-shrink:0;
+    }
+
+    /* ── TIMELINE ── */
+    .timeline { position: relative; padding-left: 28px; }
+    .timeline::before {
+      content:''; position:absolute; left:0; top:8px; bottom:0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--accent), var(--accent2), transparent);
+      border-radius: 2px;
+    }
+    .tl-item {
+      position: relative; margin-bottom: 40px;
+    }
+    .tl-item::before {
+      content:''; position:absolute; left:-35px; top:6px;
+      width:12px; height:12px; border-radius:50%;
+      background: var(--accent);
+      border: 3px solid var(--bg);
+      box-shadow: 0 0 0 2px var(--accent);
+    }
+    .tl-date {
+      font-size: 0.75rem; font-weight: 700; color: var(--accent);
+      letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px;
+    }
+    .tl-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700; font-size: 1.05rem; color: var(--white);
+      margin-bottom: 6px;
+    }
+    .tl-desc { color: var(--muted); font-size: 0.875rem; }
+
+    /* ── CONTACT ── */
+    #contact .contact-inner {
+      max-width: 700px;
+    }
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 16px; margin-top: 48px;
+    }
+    .contact-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      text-decoration: none;
+      transition: border-color 0.25s, transform 0.25s;
+      display: block;
+    }
+    .contact-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+    }
+    .contact-card-icon {
+      font-size: 24px; margin-bottom: 12px;
+    }
+    .contact-card-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700; font-size: 1rem;
+      color: var(--white); margin-bottom: 4px;
+    }
+    .contact-card-sub {
+      font-size: 0.82rem; color: var(--muted);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 40px 5%;
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 16px;
+      position: relative; z-index:1;
+    }
+    .footer-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800; color: var(--white);
+      font-size: 1rem;
+    }
+    .footer-logo span { color: var(--accent); }
+    footer p { font-size: 0.8rem; color: var(--muted); }
+    .footer-links { display:flex; gap:24px; }
+    .footer-links a {
+      font-size: 0.8rem; color: var(--muted);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--accent); }
+
+    /* ── SCROLL INDICATOR ── */
+    .scroll-line {
+      position: fixed; top:0; left:0; height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      z-index:200;
+      width: 0%;
+      transition: width 0.05s linear;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 14px 5%; }
+      .nav-links { display: none; }
+      #about .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .hero-stats { gap: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Scroll progress -->
+<div class="scroll-line" id="scrollLine"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#home" class="nav-logo">MKA<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact" class="nav-cta">Hire Me</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-glow g1"></div>
+  <div class="hero-glow g2"></div>
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      Available for Freelance
+    </div>
+    <h1 class="hero-name">
+      Moe Kyaw
+      <span class="accent-line">Aung.</span>
+    </h1>
+    <p class="hero-tagline">
+      Android Developer · Web Designer · Data Visualization specialist
+      building clean, functional digital experiences from Tachileik, Myanmar.
+    </p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn-primary">
+        View Projects
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 12h14m-5-5 5 5-5 5"/></svg>
+      </a>
+      <a href="https://github.com/Moekyawaung" target="_blank" class="btn-ghost">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        GitHub
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-number">3<span>+</span></div>
+        <div class="stat-label">Years Coding</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">10<span>+</span></div>
+        <div class="stat-label">Projects Built</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">3</div>
+        <div class="stat-label">Tech Stacks</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">Portfolio</div>
+  <h2 class="section-title">Featured Projects</h2>
+  <p class="section-sub">Handpicked work across Android, Data Visualization, and the Web.</p>
+
+  <div class="projects-grid">
+
+    <!-- Card 1 -->
+    <div class="project-card">
+      <div class="project-icon icon-green">📱</div>
+      <div class="project-title">Android Portfolio App</div>
+      <div class="project-desc">
+        Modern Android application demonstrating clean architecture principles,
+        Material 3 design system, and smooth Compose UI animations.
+      </div>
+      <div class="tag-row">
+        <span class="tag accent">Kotlin</span>
+        <span class="tag">Jetpack Compose</span>
+        <span class="tag">MVVM</span>
+        <span class="tag">Material 3</span>
+      </div>
+      <a href="https://github.com/Moekyawaung" class="project-link" target="_blank">
+        View on GitHub
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 12h14m-5-5 5 5-5 5"/></svg>
+      </a>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="project-card">
+      <div class="project-icon icon-blue">📊</div>
+      <div class="project-title">Data Visualization Dashboard</div>
+      <div class="project-desc">
+        Interactive dashboards and publication-quality charts built with R,
+        ggplot2, and Shiny — designed for academic and portfolio use cases.
+      </div>
+      <div class="tag-row">
+        <span class="tag accent">R</span>
+        <span class="tag">ggplot2</span>
+        <span class="tag">Shiny</span>
+        <span class="tag">Tidyverse</span>
+      </div>
+      <a href="#" class="project-link">
+        View Project
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 12h14m-5-5 5 5-5 5"/></svg>
+      </a>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="project-card">
+      <div class="project-icon icon-orange">🌐</div>
+      <div class="project-title">Academic Portfolio Site</div>
+      <div class="project-desc">
+        This very website — a custom-designed Jekyll site using glassmorphism
+        aesthetics, hosted on GitHub Pages with responsive layout.
+      </div>
+      <div class="tag-row">
+        <span class="tag accent">Jekyll</span>
+        <span class="tag">CSS3</span>
+        <span class="tag">GitHub Pages</span>
+        <span class="tag">Responsive</span>
+      </div>
+      <a href="https://github.com/Moekyawaung/moekyawaung.github.io" class="project-link" target="_blank">
+        View Source
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 12h14m-5-5 5 5-5 5"/></svg>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-photo-wrap">
+      <div class="about-photo">MKA</div>
+      <div class="about-badge-float">📍 Tachileik, Myanmar</div>
+    </div>
+    <div class="about-text">
+      <div class="section-label">About Me</div>
+      <h3>Building for Android,<br>the Web & Beyond.</h3>
+      <p>
+        I'm an Android Developer and Web Designer based in Tachileik, Shan State, Myanmar.
+
+
