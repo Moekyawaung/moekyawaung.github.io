@@ -4,8 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Moe Kyaw Aung — Android Developer & Designer</title>
+
+  <!--
+    FONT LOADING FIX — 3 steps:
+    1. preconnect to fonts.googleapis.com (DNS + TCP early)
+    2. preconnect to fonts.gstatic.com with crossorigin (where the actual font files live)
+    3. Load stylesheet with &display=swap so text is visible immediately
+       even before the custom font arrives, then swaps in smoothly.
+  -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -26,7 +36,8 @@
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'DM Sans', sans-serif;
+      /* Fallback chain: Google Font → similar system font → generic sans */
+      font-family: 'DM Sans', 'SF Pro Text', 'Segoe UI', system-ui, -apple-system, sans-serif;
       font-size: 16px;
       line-height: 1.65;
       overflow-x: hidden;
@@ -426,8 +437,19 @@
     .footer-links a:hover { color: var(--accent); }
 
     /* ── SCROLL INDICATOR ── */
-    .scroll-line {
-      position: fixed; top:0; left:0; height: 3px;
+    .hero-name,
+    .section-title,
+    .project-title,
+    .about-text h3,
+    .nav-logo,
+    .footer-logo,
+    .tl-title,
+    .contact-card-title,
+    .stat-number {
+      font-family: 'Syne', 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    /* Ensure letter-spacing still looks good with fallback fonts */
       background: linear-gradient(90deg, var(--accent), var(--accent2));
       z-index:200;
       width: 0%;
@@ -569,28 +591,4 @@
         <span class="tag">GitHub Pages</span>
         <span class="tag">Responsive</span>
       </div>
-      <a href="https://github.com/Moekyawaung/moekyawaung.github.io" class="project-link" target="_blank">
-        View Source
-        <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 12h14m-5-5 5 5-5 5"/></svg>
-      </a>
-    </div>
-
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- ABOUT -->
-<section id="about">
-  <div class="about-grid">
-    <div class="about-photo-wrap">
-      <div class="about-photo">MKA</div>
-      <div class="about-badge-float">📍 Tachileik, Myanmar</div>
-    </div>
-    <div class="about-text">
-      <div class="section-label">About Me</div>
-      <h3>Building for Android,<br>the Web & Beyond.</h3>
-      <p>
-        I'm an Android Developer and Web Designer based in Tachileik, Shan State, Myanmar.
-
-
+      <a href="https:/
