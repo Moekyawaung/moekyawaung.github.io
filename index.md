@@ -61,3 +61,28 @@ title: Moe Kyaw Aung
     </div>
   </div>
 </section>
+
+<section id="about" class="about" style="padding: 100px 0; background: var(--bg-primary);">
+  <div class="container">
+    <h2 style="text-align: center; margin-bottom: 3rem; font-size: 2.5rem;">About Me</h2>
+    <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 4rem;">
+      <div>
+        <img src="https://via.placeholder.com/300x300/00d4aa/0a0b0d?text=MA" 
+             alt="Moe Kyaw Aung" 
+             style="width: 100%; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
+      </div>
+      <div>
+        <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-secondary);">
+          Android Developer နဲ့ Web Designer ဖြစ်ပြီး Tachileik , Myanmar မှာ အခုလက်ရှိ နေထိုင်နေပါတယ်။ 
+          R + ggplot2 နဲ့ data visualization projects တွေလည်း အများကြီး လုပ်ခဲ့ပါတယ်။
+        </p>
+        <div class="tech-stack" style="margin-top: 2rem;">
+          <span class="tech-tag" style="background: rgba(0,212,170,0.2);">Kotlin</span>
+          <span class="tech-tag" style="background: rgba(139,92,246,0.2);">Jetpack Compose</span>
+          <span class="tech-tag" style="background: rgba(0,212,170,0.2);">ggplot2</span>
+          <span class="tech-tag" style="background: rgba(139,92,246,0.2);">Jekyll</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
